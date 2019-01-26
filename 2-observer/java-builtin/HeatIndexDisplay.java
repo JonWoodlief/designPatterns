@@ -3,16 +3,17 @@ import java.util.Observer;
 
 public class HeatIndexDisplay implements Observer, DisplayElement {
     private float heatIndex;
-    privat;
+    Observable observable;
     
     public HeatIndexDisplay(Observable observable) {
-        this.observable
+        this.observable = observable;
+        observable.addObserver(this);
     }
 
     public void update(Observable obs, Object arg) {
         if (obs instanceof WeatherData) {
             WeatherData weatherData = (WeatherData)obs;
-            this.heatIndex = computeHeatIndex(weatherData.getTemperature(), weatherData.getHumidity())
+            heatIndex = computeHeatIndex(weatherData.getTemperature(), weatherData.getHumidity());
             display();
         }
     }
